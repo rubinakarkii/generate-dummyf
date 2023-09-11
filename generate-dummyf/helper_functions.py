@@ -4,21 +4,39 @@ import csv
 import os
 import json
 import openpyxl
-import PyPDF2
 from docx import Document
 
-def validate_args(**kwargs):
-    data_type_dict = {"file_size": int, "column_description" : dict}
-    for key, value in kwargs.items():
-        if not data_type_dict[key] == type(value):
-                raise Exception(f"Error: {key} argument's data type should be {data_type_dict[key]}")
+class Validation:
+    def __init__(self,**kwargs):
+        self.arguments = kwargs
+        self.data_type_dict = {"file_size": int, "column_description" : dict}
+        self.allowed_data_types = ["int","str","boolean","datetime","float"]
 
-def get_path_to_create_new_file():
-    downloads_folder = os.path.expanduser("~") + "/Downloads/"
+    def validate_args(self):
+        for key, value in self.arguments.items():
+            if not self.data_type_dict[key] == type(value):
+                raise Exception(f"Error: The value of '{key}' argument should be of {self.data_type_dict[key]} data type")
+
+    def validate_file_size_limit(self):
+        if not 0 <= self.arguments["file_size"] <= 5000000000: 
+            raise Exception(f"Error: The value of 'file_size' argument should be between 0 and 5GB")
+
+    def validate_column_description(self):
+        for key,value in self.arguments["column_description"].items():
+            if type(key) == str and type(value) == str:
+                if value in self.allowed_data_types:
+                    pass
+                else:
+                    raise Exception(f"Error: The values of 'column_description' dictionary should belong to the set of allowed data types i.e {self.allowed_data_types}")
+            else:
+                raise Exception(f"Error: The keys and values of 'column_description' dictionary should have key and value of string type")
+
+def get_path_to_create_new_file(file_type):
+    downloads_folder = f'{os.path.expanduser("~")}/Downloads/Dummy.{file_type}'
     return downloads_folder
 
 def zero_byte_file(file_type):
-    with open(f'{get_path_to_create_new_file()}Dummy.{file_type}',"w"):
+    with open(f'{get_path_to_create_new_file(file_type)}',"w"):
         return None
 
 def generate_random_string():
@@ -34,7 +52,7 @@ def generate_random_float():
 def generate_random_boolean():
     return random.choice([True, False])
 
-def prepare_csv(file_size,column_description): 
+def prepare_csv(file_type,file_size,column_description): 
     data_type_value = {"str": generate_random_string(), "int": generate_random_int(), "datetime": datetime.now(), "float": generate_random_float(), "boolean": generate_random_boolean()}
     column_headers = []
     row = []
@@ -42,7 +60,7 @@ def prepare_csv(file_size,column_description):
         column_headers.append(k)
         row.append(data_type_value[v])
 
-    new_file_path = f'{get_path_to_create_new_file()}Dummy.csv'
+    new_file_path = get_path_to_create_new_file(file_type)
     with open(new_file_path, 'w', newline='') as csv_file:
         csv_writer = csv.writer(csv_file)
         current_file_size = 0
@@ -51,10 +69,10 @@ def prepare_csv(file_size,column_description):
             csv_writer.writerow(row)
             current_file_size = csv_file.tell() 
     
-def prepare_json(file_size, column_description):
+def prepare_json(file_type, file_size, column_description):
     data_type_value = {"str": generate_random_string(), "int": generate_random_int(), "datetime": datetime.now(), "float": generate_random_float(), "boolean": generate_random_boolean()}
     row = {k : data_type_value[v] for k,v in column_description.items()}
-    new_file_path = f'{get_path_to_create_new_file()}Dummy.json'
+    new_file_path = get_path_to_create_new_file(file_type)
     data = []
     current_file_size = 0
     while(current_file_size<=file_size):
@@ -63,7 +81,7 @@ def prepare_json(file_size, column_description):
             json.dump(data, json_file, default=str, indent=4)
             current_file_size = json_file.tell() 
 
-def prepare_excel(file_size, column_description):
+def prepare_excel(file_type,file_size, column_description):
     data_type_value = {"str": generate_random_string(), "int": generate_random_int(), "datetime": datetime.now(), "float": generate_random_float(), "boolean": generate_random_boolean()}
     column_headers = []
     row = []
@@ -71,7 +89,7 @@ def prepare_excel(file_size, column_description):
         column_headers.append(k)
         row.append(data_type_value[v])
 
-    new_file_path = f'{get_path_to_create_new_file()}Dummy.xlsx'
+    new_file_path = get_path_to_create_new_file(file_type)
     workbook = openpyxl.Workbook()
     worksheet = workbook.active
     current_file_size = 0
@@ -82,8 +100,8 @@ def prepare_excel(file_size, column_description):
         worksheet.append(row)
     workbook.close()
 
-def prepare_txt(file_size):
-    new_file_path = f'{get_path_to_create_new_file()}Dummy.txt'
+def prepare_txt(file_type,file_size):
+    new_file_path = get_path_to_create_new_file(file_type)
     with open(new_file_path, 'a') as txt_file:
         current_file_size = 0
         while(current_file_size<=file_size): 
@@ -91,17 +109,8 @@ def prepare_txt(file_size):
             txt_file.write(txt+ '\n')
             current_file_size = txt_file.tell() 
 
-def prepare_pdf(file_size):
-    new_file_path = f'{get_path_to_create_new_file()}Dummy.docx'
-    # import ipdb;ipdb.set_trace()
-    pdf_writer = PyPDF2.PdfFileWriter()
-    current_file_size = 0
-    while(current_file_size<=file_size): 
-        pdf_line = generate_random_string()
-        # current_file_size = .tell() 
-
-def prepare_docx(file_size):
-    new_file_path = f'{get_path_to_create_new_file()}Dummy.docx'
+def prepare_docx(file_type,file_size):
+    new_file_path = get_path_to_create_new_file(file_type)
     doc = Document()
     current_file_size = 0
     while(current_file_size<=file_size): 
@@ -112,16 +121,19 @@ def prepare_docx(file_size):
 
 def main(file_type, **kwargs):
     try:
-        validate_args(**kwargs)
+        obj = Validation(**kwargs)
+        obj.validate_args()
+        obj.validate_file_size_limit()
+        if file_type in ["csv","xlsx"]: obj.validate_column_description()
+
         print(f"Generating dummy {file_type} file of size {kwargs['file_size']} bytes")
         if kwargs["file_size"]==0: zero_byte_file(file_type)
         else:
-            if file_type=="csv": prepare_csv(kwargs["file_size"], kwargs["column_description"])
-            if file_type=="json": prepare_json(kwargs["file_size"], kwargs["column_description"])
-            if file_type=="xlsx": prepare_excel(kwargs["file_size"], kwargs["column_description"])
-            if file_type=="txt": prepare_txt(kwargs["file_size"])
-            if file_type=="pdf": prepare_pdf(kwargs["file_size"])
-            if file_type=="docx": prepare_docx(kwargs["file_size"])
+            if file_type=="csv": prepare_csv(file_type, kwargs["file_size"], kwargs["column_description"])
+            if file_type=="json": prepare_json(file_type,kwargs["file_size"], kwargs["column_description"])
+            if file_type=="xlsx": prepare_excel(file_type,kwargs["file_size"], kwargs["column_description"])
+            if file_type=="txt": prepare_txt(file_type,kwargs["file_size"])
+            if file_type=="docx": prepare_docx(file_type,kwargs["file_size"])
         print(f"Generated dummy {file_type} file in your downloads folder")
     except Exception as e:
         print(e)

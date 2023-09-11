@@ -1,3 +1,4 @@
+aspose-pdf==23.8.0
 asttokens==2.0.8
 backcall==0.2.0
 bson==0.5.10
