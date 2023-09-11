@@ -5,11 +5,12 @@ import os
 import json
 import openpyxl
 from docx import Document
+from docx.shared import Pt
 
 class Validation:
     def __init__(self,**kwargs):
         self.arguments = kwargs
-        self.data_type_dict = {"file_size": int, "column_description" : dict}
+        self.data_type_dict = {"file_size": int, "column_description" : dict, "font_size" : int}
         self.allowed_data_types = ["int","str","boolean","datetime","float"]
 
     def validate_args(self):
@@ -30,6 +31,10 @@ class Validation:
                     raise Exception(f"Error: The values of 'column_description' dictionary should belong to the set of allowed data types i.e {self.allowed_data_types}")
             else:
                 raise Exception(f"Error: The keys and values of 'column_description' dictionary should have key and value of string type")
+            
+    def validate_font_attributes(self):
+        if not 1 <= self.arguments["font_size"] <= 1683:
+            raise Exception(f"Error: The value of 'font_size' argument should be between 1 and 1683")
 
 def get_path_to_create_new_file(file_type):
     downloads_folder = f'{os.path.expanduser("~")}/Downloads/Dummy.{file_type}'
@@ -109,13 +114,15 @@ def prepare_txt(file_type,file_size):
             txt_file.write(txt+ '\n')
             current_file_size = txt_file.tell() 
 
-def prepare_docx(file_type,file_size):
+def prepare_docx(file_type,file_size,font_size):
     new_file_path = get_path_to_create_new_file(file_type)
     doc = Document()
     current_file_size = 0
     while(current_file_size<=file_size): 
         word_line = generate_random_string()
-        doc.add_paragraph(word_line)
+        paragraph = doc.add_paragraph(word_line)
+        font = paragraph.runs[0].font
+        font.size = font_size
         doc.save(new_file_path)
         current_file_size = os.path.getsize(new_file_path)
 
@@ -124,7 +131,8 @@ def main(file_type, **kwargs):
         obj = Validation(**kwargs)
         obj.validate_args()
         obj.validate_file_size_limit()
-        if file_type in ["csv","xlsx"]: obj.validate_column_description()
+        if file_type in ["csv","json","xlsx"]: obj.validate_column_description()
+        if file_type == "docx": obj.validate_font_attributes()
 
         print(f"Generating dummy {file_type} file of size {kwargs['file_size']} bytes")
         if kwargs["file_size"]==0: zero_byte_file(file_type)
@@ -133,7 +141,7 @@ def main(file_type, **kwargs):
             if file_type=="json": prepare_json(file_type,kwargs["file_size"], kwargs["column_description"])
             if file_type=="xlsx": prepare_excel(file_type,kwargs["file_size"], kwargs["column_description"])
             if file_type=="txt": prepare_txt(file_type,kwargs["file_size"])
-            if file_type=="docx": prepare_docx(file_type,kwargs["file_size"])
+            if file_type=="docx": prepare_docx(file_type,kwargs["file_size"], kwargs["font_size"])
         print(f"Generated dummy {file_type} file in your downloads folder")
     except Exception as e:
         print(e)
