@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 VERSION = '0.1.0' 
-DESCRIPTION = 'Generate different types(json, csv, excel, word, pdf) of dummy files'
+DESCRIPTION = 'Generate different types(json, csv, excel, word, txt) of dummy files'
 
 # Setting up
 setup(
@@ -14,6 +14,5 @@ setup(
         packages=find_packages(),
         url='https://github.com/rubinakarkii/generate-dummyf',
         license='LICENSE.txt',
-        install_requires=[], # add any additional packages that 
-        # needs to be installed along with your package. Eg: 'caer'
+        install_requires=['openpyxl','python-docx'], 
 )
