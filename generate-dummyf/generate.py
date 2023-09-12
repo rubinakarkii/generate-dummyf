@@ -1,4 +1,4 @@
-from helper_functions import main
+from prepare_files import main
 
 """
 File size argument should be in bytes
