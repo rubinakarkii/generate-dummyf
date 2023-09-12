@@ -20,43 +20,38 @@
 
 1. ### Import the package ###
    ```
-   from generate_dummyf import DummyFileGenerator
+   from generate_dummyf import *
    ```
 
-2. ### Create a generator instance ###
+2. ### Generate a JSON file ###
    ```
-   generator = DummyFileGenerator()
-   ```
-
-3. ### Generate a JSON file ###
-   ```
-   json_data = generator.generate_json(file_size=50000)
-   json_data = generator.generate_json(file_size=50000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
+   json_data = generate_json(file_size=50000)
+   json_data = generate_json(file_size=50000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
    ```
 
-4. ### Generate an Excel file ###
+3. ### Generate an Excel file ###
    ```
-   excel_data = generator.generate_excel(file_size=50000)
-   excel_data = generator.generate_excel(file_size=50000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
-   ```
-
-5. ### Generate a CSV file 
-   ```
-   csv_data = generator.generate_csv(file_size=5000)
-   csv_data = generator.generate_csv(file_size=5000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
+   excel_data = generate_excel(file_size=50000)
+   excel_data = generate_excel(file_size=50000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
    ```
 
-6. ### Generate a DOCX file ###
+4. ### Generate a CSV file 
    ```
-   docx_data = generator.generate_word(file_size=50000)
-   ```
-
-7. ### Generate a TXT file ###
-   ```
-   docx_data = generator.generate_txt(file_size=5000)
+   csv_data = generate_csv(file_size=5000)
+   csv_data = generate_csv(file_size=5000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
    ```
 
-8. ### View the generated files ###
+5. ### Generate a DOCX file ###
+   ```
+   docx_data = generate_word(file_size=50000)
+   ```
+
+6. ### Generate a TXT file ###
+   ```
+   docx_data = generate_txt(file_size=5000)
+   ```
+
+7. ### View the generated files ###
    The generated files will be saved in the downloads directory.
 
 ## Contributing ##
