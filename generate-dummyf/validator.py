@@ -1,12 +1,12 @@
 class Validation:
     def __init__(self,**kwargs):
         self.arguments = kwargs
-        self.data_type_dict = {"file_size": int, "column_description" : dict, "font_size" : int}
+        self.column_type_mapping = {"file_size": int, "column_description" : dict, "font_size" : int}
         self.allowed_data_types = ["int","str","boolean","datetime","float"]
 
     def validate_args(self):
         for key, value in self.arguments.items():
-            if not self.data_type_dict[key] == type(value):
+            if not self.column_type_mapping[key] == type(value):
                 raise Exception(f"Error: The value of '{key}' argument should be of {self.data_type_dict[key]} data type")
 
     def validate_file_size_limit(self):
