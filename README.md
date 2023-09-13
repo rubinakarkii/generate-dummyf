@@ -54,6 +54,15 @@
 7. ### View the generated files ###
    The generated files will be saved in the downloads directory.
 
+## Run the tests (For developers) ##
+   ```
+   python -m unittest tests/test_csv.py 
+   python -m unittest tests/test_excel.py 
+   python -m unittest tests/test_json.py 
+   python -m unittest tests/test_txt.py 
+   python -m unittest tests/test_word.py 
+   ```
+
 ## Contributing ##
    Contributions to generate-dummyf are welcome! If you'd like to contribute to this project, please follow our contribution guidelines.
 

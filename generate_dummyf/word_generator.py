@@ -25,4 +25,5 @@ class WordGenerator:
         obj = Validation(**self.arguments)
         obj.validate_args()
         obj.validate_file_size_limit()
+        obj.validate_font_attributes()
         self.generate_file()

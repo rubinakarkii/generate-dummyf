@@ -19,7 +19,7 @@ class Validation:
         for key,value in self.arguments["column_description"].items():
             if type(key) == str and type(value) == str:
                 if not value in self.allowed_data_types:
-                    raise InvalidColumnTypeException(f"The values of 'column_description' dictionary should belong to the set of allowed data types i.e {self.allowed_data_types}")
+                    raise InvalidColumnDescriptionValueException(f"The values of 'column_description' dictionary should belong to the set of allowed data types i.e {self.allowed_data_types}")
             else:
                 raise InvalidInputDataTypeException(f"The keys and values of 'column_description' dictionary should have key and value of string type")
             

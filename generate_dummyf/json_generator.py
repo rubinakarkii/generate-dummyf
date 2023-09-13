@@ -17,7 +17,7 @@ class JsonGenerator:
         data = []
         current_file_size = 0
         while(current_file_size<=self.arguments["file_size"]):
-            with open(self.new_file_path, 'w') as json_file:            
+            with open(self.new_file_path, 'wb') as json_file:            
                 data.append(self.row)
                 json.dump(data, json_file, default=str, indent=4)
                 current_file_size = json_file.tell() 
