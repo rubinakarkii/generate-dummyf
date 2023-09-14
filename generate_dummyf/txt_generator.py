@@ -18,5 +18,10 @@ class TxtGenerator:
     def main(self):
         obj = Validation(**self.arguments)
         obj.validate_args()
+        if self.arguments["save_file_path"]:
+            obj.validate_file_path()
+            self.new_file_path = get_path_to_create_new_file("txt", user_input_path = self.arguments["save_file_path"])
+        else:
+            self.new_file_path = get_path_to_create_new_file("txt")
         obj.validate_file_size_limit()
         self.generate_file()

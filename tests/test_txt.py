@@ -7,8 +7,12 @@ class TxtTestCase(unittest.TestCase):
         """Case 1: function is provided an input with incorrect data type for file_size (str instead of int)"""
         self.assertRaises(InvalidInputDataTypeException, generate_txt("1000"))
 
+    def test_invalid_file_path(self):
+        """Case 2: function is given invalid path for saving file"""
+        self.assertRaises(InvalidColumnDescriptionValueException, generate_txt(1000, save_file_path="bhsdajhbfsdj"))
+
     def test_invalid_file_size_value(self):
-        """Case 2:  function is provided an invalid file size"""
+        """Case 3:  function is provided an invalid file size"""
         self.assertRaises(InvalidSizeException, generate_txt(-1000))
 
 

@@ -11,14 +11,17 @@ class ExcelTestCase(unittest.TestCase):
         """Case 2: function is provided an input with incorrect data type for column_description's values() (int as object instead of int as str)"""
         self.assertRaises(InvalidInputDataTypeException, generate_excel(3824, {"Roll No.": int}))
 
+    def test_invalid_file_path(self):
+        """Case 3: function is given invalid path for saving file"""
+        self.assertRaises(InvalidColumnDescriptionValueException, generate_excel(1000, save_file_path="bhsdajhbfsdj"))
+
     def test_invalid_file_size_value(self):
-        """Case 3:  function is provided an invalid file size"""
+        """Case 4:  function is provided an invalid file size"""
         self.assertRaises(InvalidSizeException, generate_excel(-1000))
 
     def test_invalid_column_description_value(self):
-        """Case 4: function is given column_description's values() that do not belong to the allowed data types list"""
+        """Case 5: function is given column_description's values() that do not belong to the allowed data types list"""
         self.assertRaises(InvalidColumnDescriptionValueException, generate_excel(1000, {"file": "object"}))
-
 
 if __name__ == '__main__':
     unittest.main()

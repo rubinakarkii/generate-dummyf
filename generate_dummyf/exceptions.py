@@ -15,3 +15,9 @@ class InvalidSizeException(Exception):
     def __init__(self, message: str):
         self.message = message
         super().__init__(self.message)
+
+class InvalidPathException(Exception):
+    """Exception raised when an invalid save file path is provided."""
+    def __init__(self, message: str):
+        self.message = message
+        super().__init__(self.message)

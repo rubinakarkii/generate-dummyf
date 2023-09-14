@@ -1,9 +1,15 @@
 import random 
 import os
 
-def get_path_to_create_new_file(file_type):
-    downloads_folder = f'{os.path.expanduser("~")}/Downloads/Dummy.{file_type}'
-    return downloads_folder
+def get_path_to_create_new_file(file_type, user_input_path = ""):
+    if user_input_path:
+        if user_input_path.endswith('/'):
+            path = f'{user_input_path}Dummy.{file_type}'
+        else:
+            path = f'{user_input_path}/Dummy.{file_type}'
+    else:
+        path = f'{os.path.expanduser("~")}/Downloads/Dummy.{file_type}'
+    return path
 
 def zero_byte_file(file_type):
     with open(f'{get_path_to_create_new_file(file_type)}',"w"):

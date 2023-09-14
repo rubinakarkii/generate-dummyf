@@ -1,15 +1,20 @@
 from exceptions import *
+import os
 
 class Validation:
     def __init__(self,**kwargs):
         self.arguments = kwargs
-        self.column_type_mapping = {"file_size": int, "column_description" : dict, "font_size" : int}
+        self.column_type_mapping = {"file_size": int, "column_description" : dict, "font_size" : int, "save_file_path": str}
         self.allowed_data_types = ["int","str","boolean","datetime","float"]
 
     def validate_args(self):
         for key, value in self.arguments.items():
             if not self.column_type_mapping[key] == type(value):
                 raise InvalidInputDataTypeException(f"The value of '{key}' argument should be of {self.column_type_mapping[key]} data type")
+
+    def validate_file_path(self):
+            if not os.path.exists(self.arguments["save_file_path"]): 
+                raise InvalidPathException(f"Provided file path '{self.arguments['save_file_path']}' for saving output file does not exist")
 
     def validate_file_size_limit(self):
         if not 0 <= self.arguments["file_size"] <= 3000000000: 

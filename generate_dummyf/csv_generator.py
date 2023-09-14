@@ -6,7 +6,7 @@ import csv
 class CsvGenerator:
     def __init__(self, **kwargs):
         self.arguments = kwargs
-        self.new_file_path = get_path_to_create_new_file("csv")
+        self.new_file_path = ""
         self.data_type_value = {"str": generate_random_string(), "int": generate_random_int(), "datetime": datetime.now(), "float": generate_random_float(), "boolean": generate_random_boolean()}
         self.column_headers = []
         self.row = []
@@ -28,6 +28,11 @@ class CsvGenerator:
     def main(self):
         obj = Validation(**self.arguments)
         obj.validate_args()
+        if self.arguments["save_file_path"]:
+            obj.validate_file_path()
+            self.new_file_path = get_path_to_create_new_file("csv", user_input_path = self.arguments["save_file_path"])
+        else:
+            self.new_file_path = get_path_to_create_new_file("csv")
         obj.validate_file_size_limit()
         obj.validate_column_description()
         self.prepare_column_data()

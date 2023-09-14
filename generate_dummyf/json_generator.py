@@ -17,7 +17,7 @@ class JsonGenerator:
         data = []
         current_file_size = 0
         while(current_file_size<=self.arguments["file_size"]):
-            with open(self.new_file_path, 'wb') as json_file:            
+            with open(self.new_file_path, 'w') as json_file:            
                 data.append(self.row)
                 json.dump(data, json_file, default=str, indent=4)
                 current_file_size = json_file.tell() 
@@ -25,6 +25,11 @@ class JsonGenerator:
     def main(self):
         obj = Validation(**self.arguments)
         obj.validate_args()
+        if self.arguments["save_file_path"]:
+            obj.validate_file_path()
+            self.new_file_path = get_path_to_create_new_file("json", user_input_path = self.arguments["save_file_path"])
+        else:
+            self.new_file_path = get_path_to_create_new_file("json")
         obj.validate_file_size_limit()
         self.prepare_column_data()
         self.generate_file()
