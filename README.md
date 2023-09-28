@@ -8,7 +8,7 @@
    Generate dummy data files in Json, Xlsx, Docx, Txt, and Csv formats. Easily specify the file size, the structure (columns and their data type) of files, path for 
    saving your output file. Generate a file with random data for a wide range of use cases.
 
-   **NOTE**: "file_size" is a mandatory argument for each generate_* function
+   **NOTE**: *file_size* is a mandatory argument for each generate_* function whose value should be in *bytes*
 
 ## Installation ##
    You can install the package using pip:
@@ -29,33 +29,33 @@
    ```
    json_data = generate_json(file_size=50000)
    json_data = generate_json(file_size=50000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
-   json_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-184/Documents/")
+   json_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
    ```
 
 3. ### Generate an Excel file ###
    ```
    excel_data = generate_excel(file_size=50000)
    excel_data = generate_excel(file_size=50000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
-   excel_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-184/Documents/")
+   excel_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
    ```
 
 4. ### Generate a CSV file 
    ```
    csv_data = generate_csv(file_size=5000)
    csv_data = generate_csv(file_size=5000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
-   csv_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-184/Documents/")
+   csv_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
    ```
 
 5. ### Generate a DOCX file ###
    ```
    docx_data = generate_word(file_size=50000)
-   docx_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-184/Documents/")
+   docx_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
    ```
 
 6. ### Generate a TXT file ###
    ```
    text_data = generate_txt(file_size=5000)
-   txt_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-184/Documents/")
+   txt_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
    ```
 
 7. ### View the generated files ###
