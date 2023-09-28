@@ -8,7 +8,8 @@
    Generate dummy data files in Json, Xlsx, Docx, Txt, and Csv formats. Easily specify the file size, the structure (columns and their data type) of files, path for 
    saving your output file. Generate a file with random data for a wide range of use cases.
 
-   **NOTE**: *file_size* is a mandatory argument for each generate_* function whose value should be in *bytes*
+   **NOTE**: *file_size* is a mandatory argument for each generate_* function whose value should be in *bytes* and the size of the output file may not be exactly 
+   equal to the user's file_size input
 
 ## Installation ##
    You can install the package using pip:

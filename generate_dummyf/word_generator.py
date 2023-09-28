@@ -31,4 +31,6 @@ class WordGenerator:
             self.new_file_path = get_path_to_create_new_file("docx")
         obj.validate_file_size_limit()
         obj.validate_font_attributes()
+        print(f"Generating the file at {self.new_file_path}")
         self.generate_file()
+        print(f"Generated the file at {self.new_file_path}")

@@ -39,4 +39,6 @@ class ExcelGenerator:
         obj.validate_file_size_limit()
         obj.validate_column_description()
         self.prepare_column_data()
+        print(f"Generating the file at {self.new_file_path}")
         self.generate_file()
+        print(f"Generated the file at {self.new_file_path}")
