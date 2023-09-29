@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: generate-dummyf
-Version: 1.1.1
+Version: 1.1.2
 Summary: Generate different types (json, csv, excel, word, txt) of dummy files
 Home-page: https://github.com/rubinakarkii/generate-dummyf
 Author: Rubina Karki
@@ -38,33 +38,33 @@ Description: # generate-dummyf Python Package #
            ```
            json_data = generate_json(file_size=50000)
            json_data = generate_json(file_size=50000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
-           json_data = generate_json(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
+           json_data = generate_json(file_size=50000, save_file_path="/home/user-pc/Documents/")
            ```
         
         3. ### Generate an Excel file ###
            ```
            excel_data = generate_excel(file_size=50000)
            excel_data = generate_excel(file_size=50000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
-           excel_data = generate_excel(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
+           excel_data = generate_excel(file_size=50000, save_file_path="/home/user-pc/Documents/")
            ```
         
         4. ### Generate a CSV file 
            ```
            csv_data = generate_csv(file_size=5000)
            csv_data = generate_csv(file_size=5000, column_description={"Contact" : "int", "Name" : "str", "Status": "boolean", "Created_Time": "datetime", "Amount": "float"})
-           csv_data = generate_csv(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
+           csv_data = generate_csv(file_size=50000, save_file_path="/home/user-pc/Documents/")
            ```
         
         5. ### Generate a DOCX file ###
            ```
            docx_data = generate_word(file_size=50000)
-           docx_data = generate_word(file_size=50000, font_size = 30, save_file_path="/home/fm-pc-lt-848/Documents/")
+           docx_data = generate_word(file_size=50000, font_size = 30, save_file_path="/home/user-pc/Documents/")
            ```
         
         6. ### Generate a TXT file ###
            ```
            text_data = generate_txt(file_size=5000)
-           txt_data = generate_txt(file_size=50000, save_file_path="/home/fm-pc-lt-848/Documents/")
+           txt_data = generate_txt(file_size=50000, save_file_path="/home/user-pc/Documents/")
            ```
         
         7. ### View the generated files ###

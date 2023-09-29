@@ -1,6 +1,6 @@
 from setuptools import setup
 
-VERSION = '1.1.1' 
+VERSION = '1.1.2' 
 DESCRIPTION = 'Generate different types (json, csv, excel, word, txt) of dummy files'
 
 # Setting up
