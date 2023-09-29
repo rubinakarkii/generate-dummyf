@@ -1,0 +1,17 @@
+README.md
+setup.py
+generate_dummyf/__init__.py
+generate_dummyf/csv_generator.py
+generate_dummyf/excel_generator.py
+generate_dummyf/exceptions.py
+generate_dummyf/generate.py
+generate_dummyf/helper_functions.py
+generate_dummyf/json_generator.py
+generate_dummyf/txt_generator.py
+generate_dummyf/validator.py
+generate_dummyf/word_generator.py
+generate_dummyf.egg-info/PKG-INFO
+generate_dummyf.egg-info/SOURCES.txt
+generate_dummyf.egg-info/dependency_links.txt
+generate_dummyf.egg-info/requires.txt
+generate_dummyf.egg-info/top_level.txt
