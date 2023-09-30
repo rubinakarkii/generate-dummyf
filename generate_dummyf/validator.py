@@ -17,8 +17,8 @@ class Validation:
                 raise InvalidPathException(f"Provided file path '{self.arguments['save_file_path']}' for saving output file does not exist")
 
     def validate_file_size_limit(self):
-        if not 0 <= self.arguments["file_size"] <= 3000000000: 
-            raise InvalidSizeException(f"The value of 'file_size' argument should be between 0 and 5GB")
+        if not 0 <= self.arguments["file_size"] <= 2000000000: 
+            raise InvalidSizeException(f"The value of 'file_size' argument should be between 0 and 2GB")
 
     def validate_column_description(self):
         for key,value in self.arguments["column_description"].items():

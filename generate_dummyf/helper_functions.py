@@ -1,3 +1,4 @@
+from datetime import datetime
 import random 
 import os
 
@@ -30,3 +31,6 @@ def generate_random_float():
 
 def generate_random_boolean():
     return random.choice([True, False])
+
+def generate_current_datetime():
+    return datetime.now()

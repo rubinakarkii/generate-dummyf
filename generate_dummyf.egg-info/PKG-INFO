@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: generate-dummyf
-Version: 1.1.2
+Version: 1.1.4
 Summary: Generate different types (json, csv, excel, word, txt) of dummy files
 Home-page: https://github.com/rubinakarkii/generate-dummyf
 Author: Rubina Karki

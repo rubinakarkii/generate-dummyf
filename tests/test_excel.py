@@ -27,7 +27,7 @@ class ExcelTestCase(unittest.TestCase):
     def test_file_generation(self):
         """Case 6: if file is generated or not """
         expected_file_path = os.path.expanduser("~")
-        generate_excel(file_size=1000, save_file_path=expected_file_path)
+        generate_excel(file_size=10000, save_file_path=expected_file_path)
 
         # Assert that the file exists --> if AssertionError is not raised, then the test is successful
         self.assertEqual(os.path.exists(f"{expected_file_path}/Dummy.xlsx"), True, f"File {expected_file_path}/Dummy.xlsx was not generated")
